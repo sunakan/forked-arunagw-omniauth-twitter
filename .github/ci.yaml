@@ -1,0 +1,22 @@
+name: CI(RSpec)
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - README.md
+      - docs/**
+      - Dockerfile
+      - docker-compose.*
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: ruby 3
+        run: docker run --rm -it ruby:3-bullseye-slim bash -c "echo hello"
+      #- name: ruby 2.7
+      #  run: docker run --rm -it ruby:2.7-bullseye-slim bash -c "echo hello"
+      #- name: ruby 2.6
+      #  run: docker run --rm -it ruby:2.6-bullseye-slim bash -c "echo hello"
