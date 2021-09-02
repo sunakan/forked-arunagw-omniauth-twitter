@@ -19,17 +19,23 @@ clean: ## コンテナを落とす(volumeも)
 ################################################################################
 # CI
 ################################################################################
+# docker-composeでRSpecするまで
+# $1:動かすサービス名(例：ruby-3.0)
+define rspec
+  docker-compose --file docker-compose.ci.yaml run --rm $1 bash -c 'bundle install && bundle exec rake'
+endef
+
 .PHONY: ci-ruby-3.0
 ci-ruby-3.0: ## Ruby3.0でCI
-	docker-compose run --rm --file docker-compose.ci.yaml ruby-3.0 bash -c 'bundle install && bundle exec rake'
+	$(call rspec, ruby-3.0)
 
 .PHONY: ci-ruby-2.7
 ci-ruby-2.7: ## Ruby2.7でCI
-	docker-compose run --rm --file docker-compose.ci.yaml ruby-2.7 bash -c 'bundle install && bundle exec rake'
+	$(call rspec, ruby-2.7)
 
 .PHONY: ci-ruby-2.6
 ci-ruby-2.6: ## Ruby2.6でCI
-	docker-compose run --rm --file docker-compose.ci.yaml ruby-2.6 bash -c 'bundle install && bundle exec rake'
+	$(call rspec, ruby-2.6)
 
 ################################################################################
 # マクロ
