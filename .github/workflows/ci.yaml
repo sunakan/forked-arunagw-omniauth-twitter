@@ -13,7 +13,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - echo Setup
+      - run: echo setup
   rspec-on-ruby-3.0:
     runs-on: ubuntu-latest
     needs: setup
@@ -35,5 +35,5 @@ jobs:
   all-ok:
     runs-on: ubuntu-latest
     needs: [rspec-on-ruby-3.0, rspec-on-ruby-2.7, rspec-on-ruby-2.6]
-    sptes:
+    steps:
       - run: echo all ok
