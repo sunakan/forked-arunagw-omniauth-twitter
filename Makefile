@@ -22,7 +22,7 @@ clean: ## コンテナを落とす(volumeも)
 # docker-composeでRSpecするまで
 # $1:動かすサービス名(例：ruby-3.0)
 define rspec
-  docker-compose --file docker-compose.ci.yaml run --rm $1 bash -c 'bundle install && bundle exec rake'
+  docker-compose --file docker-compose.ci.yaml run --rm $1 bash -c 'gem uninstall bundler && gem install bunlder && bundle install && bundle exec rake'
 endef
 
 .PHONY: ci-ruby-3.0
