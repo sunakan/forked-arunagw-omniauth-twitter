@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: ruby 3
-        run: docker run --rm -it ruby:3-bullseye-slim bash -c "echo hello"
+        run: docker run --rm ruby:3-bullseye-slim bash -c "echo hello"
       #- name: ruby 2.7
       #  run: docker run --rm -it ruby:2.7-bullseye-slim bash -c "echo hello"
       #- name: ruby 2.6
