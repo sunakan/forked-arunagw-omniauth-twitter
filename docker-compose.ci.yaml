@@ -1,0 +1,31 @@
+---
+
+version: '3.8'
+
+services:
+  ruby-3.0:
+    working_dir: /var/local/app/
+    image: ruby:3.0-bullseye
+    volumes:
+      - bundle-install-3.0:/usr/local/bundle
+      - ${PWD}/:/var/local/app/
+  ruby-2.7:
+    working_dir: /var/local/app/
+    image: ruby:2.7-bullseye
+    volumes:
+      - bundle-install-2.7:/usr/local/bundle
+      - ${PWD}/:/var/local/app/
+  ruby-2.6:
+    working_dir: /var/local/app/
+    image: ruby:2.6-bullseye
+    volumes:
+      - bundle-install-2.6:/usr/local/bundle
+      - ${PWD}/:/var/local/app/
+
+volumes:
+  bundle-install-3.0:
+    driver: local
+  bundle-install-2.7:
+    driver: local
+  bundle-install-2.6:
+    driver: local

@@ -10,13 +10,30 @@ on:
       - docker-compose.*
 
 jobs:
-  rspec:
+  setup:
     runs-on: ubuntu-latest
     steps:
+      - echo Setup
+  rspec-on-ruby-3.0:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - uses: actions/checkout@v2
-      - name: ruby 3
-        run: docker run --rm ruby:3-slim-bullseye bash -c "echo hello"
-      #- name: ruby 2.7
-      #  run: docker run --rm -it ruby:2.7-bullseye-slim bash -c "echo hello"
-      #- name: ruby 2.6
-      #  run: docker run --rm -it ruby:2.6-bullseye-slim bash -c "echo hello"
+      - run: make ci-ruby-3.0
+  rspec-on-ruby-2.7:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - run: make ci-ruby-2.7
+  rspec-on-ruby-2.6:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - run: make ci-ruby-2.6
+  all-ok:
+    runs-on: ubuntu-latest
+    needs: [rspec-on-ruby-3.0, rspec-on-ruby-2.7, rspec-on-ruby-2.6]
+    sptes:
+      - run: echo all ok
