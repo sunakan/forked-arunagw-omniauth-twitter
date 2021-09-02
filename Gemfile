@@ -18,4 +18,6 @@ group :test do
   gem 'rack-test'
   gem 'simplecov'
   gem 'webmock'
+
+  gem 'omniauth', '1.9.1'
 end
